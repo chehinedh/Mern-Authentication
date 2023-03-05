@@ -9,6 +9,18 @@ const cors = require("cors");
 // express app
 const app = express();
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
+
+// enable CORS
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 // middleware
 app.use(express.json());
 
@@ -34,13 +46,4 @@ mongoose
     console.log(error);
   });
 
-// enable CORS
-var corsOptions = {
-  origin: "http://localhost:3000",
-};
-app.use(cors(corsOptions));
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-// parse application/json
-app.use(bodyParser.json());
